@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const {listingSchema} = require("./schema.js");
 
 
 const MONGO_URL = 'mongodb+srv://pulkitd132:qA7ZZBlBnH2fO8eD@cluster0.vcf0mow.mongodb.net/wanderlust';
@@ -77,17 +78,6 @@ app.post("/listings", wrapAsync(async (req, res, next) => {
             throw new ExpressError(400,"Send valid data for listing");
         }
         const newListing = new Listing(req.body.listing);
-        if(!newListing.title) {
-            throw new ExpressError(400, "Title is missing");
-        }
-
-        if(!newListing.description) {
-            throw new ExpressError(400, "Description is missing");
-        }
-
-        if(!newListing.location) {
-            throw new ExpressError(400, "Location is missing");
-        }
         await newListing.save();
         res.redirect("/listings");
     
