@@ -47,13 +47,20 @@
         <button class="btn btn-outline-dark">Submit</button>
       </form>
       <hr>
-      <h4>All Reviews</h4>
-      <ul>
-
+      <p><b>All Reviews</b></p>
+      <% if (listing.reviews && listing.reviews.length) { %>
         <% for(review of listing.reviews) { %>
-          <li> <%= review.comment %>, <%= review.rating %> stars</li>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">John Doe</h5>
+                <p class="card-text"><%= review.comment %></p>
+                <p class="card-text"><%= review.rating %></p>
+              </div>
+            </div>
         <% } %>
-      </ul>
+        <% } else { %>
+        <p>No reviews available</p>
+      <% } %>
     </div>
   </div>
 
