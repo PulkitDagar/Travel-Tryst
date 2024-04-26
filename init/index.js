@@ -28,6 +28,8 @@ const initDB = async () => {
         ...listing,
         image: listing.image.url // Assuming the 'url' property contains the URL string
     }));
+
+    initData.data = initData.data.map((obj) => ({...obj, owner: "661e0fd7f680046877af9d4a"}))
     await Listing.insertMany(transformedData);
     console.log("Data is Initialized");
 };
